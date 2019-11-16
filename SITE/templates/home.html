@@ -1,0 +1,12 @@
+WELCOME-HOME
+<br>
+<form action="" method="POST">
+        {{ form.hidden_tag() }}
+    {{ form.url }}
+    {{ form.submit }}
+</form>
+
+<br>
+{% if url %}
+URL IS {{ url }}
+{% endif %}
