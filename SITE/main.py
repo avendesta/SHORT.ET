@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from forms import ExtendForm
 from flask_bootstrap import Bootstrap
 
@@ -18,8 +18,6 @@ def home():
     form = ExtendForm()
     if request.method == "POST" and request.form.get('url'):
         url = request.form.get('url')
-    else:
-        url = ""
     return render_template("home.html",url=url,form=form)
 
 if __name__ == "__main__":
