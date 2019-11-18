@@ -18,6 +18,8 @@ def home():
     form = ExtendForm()
     if request.method == "POST" and request.form.get('url'):
         url = request.form.get('url')
+    else:
+        url = ""
     return render_template("home.html",url=url,form=form)
 
 if __name__ == "__main__":
