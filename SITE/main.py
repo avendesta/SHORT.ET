@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from forms import ExtendForm, LoginForm, RegisterForm
@@ -11,13 +12,24 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
-    password = db.Column(db.Strin(60), nullable=False)
-
+    username = db.Column(db.String(40), unique=True, nullable=False)
+    email = db.Column(db.String(40), unique=True, nullable=False)
+    image_file = db.Column(db.String(40), nullable=False, default='default.jpg')
+    password = db.Column(db.String(60), nullable=False)
+    links = db.relationship('Link',backref='creator', lazy=True)
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.image_file}')"
+
+class Link(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    short_link = db.Column(db.String(100), unique=True, nullable=False)
+    long_link = db.Column(db.String(100), nullable=False)
+    date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    total_clicks = db.Column(db.Integer, nullable=False,default=0)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Link('{self.short_link}','{self.long_link}','{self.date_created}')"
 
 
 @app.route("/",methods=["GET","POST"])
