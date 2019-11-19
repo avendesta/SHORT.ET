@@ -3,7 +3,6 @@ from forms import ExtendForm
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
-# Bootstrap(app)
 app.config["SECRET_KEY"] = "tHISiSsECRET"
 
 @app.route("/",methods=["GET","POST"])
@@ -20,6 +19,14 @@ def home():
         url = form.url.data
         return render_template("home.html", url=url, title="Home", form=form)    
     return render_template("home.html", title="Home", form=form)    
+
+@app.route("/login")
+def login():
+    return "This is login page"
+
+@app.route("/register")
+def register():
+    return "This is registration page"
 
 
 @app.errorhandler(404)
