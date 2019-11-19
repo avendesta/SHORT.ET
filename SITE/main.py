@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from forms import ExtendForm
+from forms import ExtendForm, LoginForm, RegisterForm
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
@@ -22,11 +22,13 @@ def home():
 
 @app.route("/login")
 def login():
-    return "This is login page"
+    form = LoginForm()
+    return render_template("login.html", form=form)
 
 @app.route("/register")
 def register():
-    return "This is registration page"
+    form = RegisterForm()
+    return render_template("register.html", form=form)
 
 
 @app.errorhandler(404)
