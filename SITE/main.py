@@ -24,12 +24,14 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         flash(f"You have successfully logged in!! ",'success')
-    return render_template("login.html", form=form)
+    return render_template("login.html", title="login", form=form)
 
 @app.route("/register", methods=["GET","POST"])
 def register():
     form = RegisterForm()
-    return render_template("register.html", form=form)
+    if form.validate_on_submit():
+        flash(f"You have successfully registered!! ",'success')    
+    return render_template("register.html", title="register", form=form)
 
 
 @app.errorhandler(404)
