@@ -1,15 +1,18 @@
- <!-- extends "bootstrap/base.html"   -->
-{% from "_formhelpers.html" import render_field %}
+{% extends "layout.html" %}
 
-WELCOME-HOME
-<br>
-<form action="" method="POST">
-        {{ form.hidden_tag() }}
-    {{ render_field(form.url) }}
-    <input type="submit" value="Go">
-</form>
+        {% block content %}
 
-<br>
-{% if url %}
-URL IS {{ url }}
-{% endif %}
+    <form action="" method="POST">
+        <div class="form-group">
+          <label>{{form.url.label}}</label>
+          {{ form.url(class="form-control form-control-lg") }}
+        </div>
+        <button type="submit" class="btn btn-outline-info">Extend</button>
+    </form>
+
+    <br>
+
+    {% if form.url %}
+        URL IS {{ form.url }}
+    {% endif %}
+        {% endblock content %}
