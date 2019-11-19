@@ -16,11 +16,10 @@ def index(slink=None):
 @app.route("/home",methods=["GET","POST"])
 def home():
     form = ExtendForm()
-    url = ""
+    url = form.url.data
     if form.validate_on_submit():
-        if request.method == "POST" and request.form.get('url'):
-            url = request.form.get('url')
-    return render_template("home.html", title="Home", url=url,form=form)
+        return render_template("home.html", title="Home", url=url,form=form)
+    return render_template("home.html", title="Home", form=form)    
 
 
 @app.errorhandler(404)

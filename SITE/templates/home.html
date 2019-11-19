@@ -4,7 +4,7 @@
 
     <form action="" method="POST">
         <div class="form-group">
-          <label>{{form.url.label}}</label>
+          <label>{{form.url.label(class="form-control-label")}}</label>
           {{ form.url(class="form-control form-control-lg") }}
         </div>
         <button type="submit" class="btn btn-outline-info">Extend</button>
@@ -13,6 +13,6 @@
     <br>
 
     {% if form.url %}
-        URL IS {{ form.url }}
+        URL IS {{ form.url.data }}
     {% endif %}
         {% endblock content %}
