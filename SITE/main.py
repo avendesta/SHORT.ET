@@ -16,15 +16,15 @@ def index(slink=None):
 @app.route("/home",methods=["GET","POST"])
 def home():
     form = ExtendForm()
-    url = form.url.data
     if form.validate_on_submit():
-        return render_template("home.html", title="Home", url=url,form=form)
+        url = form.url.data
+        return render_template("home.html", url=url, title="Home", form=form)    
     return render_template("home.html", title="Home", form=form)    
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html")
+    return render_template("404.html",title="NOT FOUND")
 
 
 if __name__ == "__main__":

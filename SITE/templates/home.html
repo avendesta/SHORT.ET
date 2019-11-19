@@ -3,6 +3,8 @@
         {% block content %}
 
     <form action="" method="POST">
+            {{ form.csrf_token }}
+
         <div class="form-group">
           <label>{{form.url.label(class="form-control-label")}}</label>
           {{ form.url(class="form-control form-control-lg") }}
@@ -12,7 +14,6 @@
 
     <br>
 
-    {% if form.url %}
-        URL IS {{ form.url.data }}
-    {% endif %}
+    URL IS {{ url }}
+
         {% endblock content %}
