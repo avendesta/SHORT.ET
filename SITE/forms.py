@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, URL, Email, EqualTo
 
 class ExtendForm(FlaskForm):
-    url = StringField("URL",validators=[DataRequired(),URL()])
+    url = StringField("URL",validators=[DataRequired(),Length(min=2,max=50), URL()])
     submit = SubmitField("Expand")
 
 class RegisterForm(FlaskForm):
