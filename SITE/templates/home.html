@@ -10,8 +10,19 @@
           Enter {{form.url.label}}:
         </span>
 
-        <div class="form-inline">
-            {{ form.url(class="form-control form-control-lg") }}
+        <div class="form-group">
+            {% if form.url.errors %}
+                {{ form.url(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                {% for error in form.url.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+                </div>
+            {% else %}
+                {{ form.url(class="form-control form-control-lg") }}
+            {% endif %}
+
+
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
     </div>
@@ -20,7 +31,7 @@
 
     <br>
 
-    URL IS {{ url }}
+    URL REVERSED IS : {{ url }}
 
 <div class="btn-inline">
     <a class="btn btn-outline-success" href="/login" role="button">LOGIN</a>
