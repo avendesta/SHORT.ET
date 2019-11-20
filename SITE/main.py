@@ -26,7 +26,9 @@ class Link(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     short_link = db.Column(db.String(100), unique=True, nullable=False)
     long_link = db.Column(db.String(100), nullable=False)
+    count = db.Column(db.Integer, nullable=False, default=0)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_destroyed = db.Column(db.DateTime, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     clicks = db.relationship('Click',backref='stat',lazy=True)
@@ -36,13 +38,12 @@ class Link(db.Model):
 
 class Click(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    count = db.Column(db.Integer, nullable=False, default=0)
     click_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     click_ip = db.Column(db.String(20), default='127.0.0.1')
     link_id = db.Column(db.Integer, db.ForeignKey('link.id'), nullable=False)
 
     def __repr__(self):
-        return f"Click('{self.count}','{self.click_date}','{self.click_ip}')"
+        return f"Click('{self.click_date}','{self.click_ip}','{self.link_id}')"
 
 
 @app.route("/",methods=["GET","POST"])

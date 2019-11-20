@@ -21,9 +21,9 @@ db.session.add(link_3)
 db.session.commit()
 
 
-click_1 = Click(count=9, click_ip='132.43.23.5', link_id=link_1.id)
-click_2 = Click(count=7, click_ip='132.43.23.5', link_id=link_2.id)
-click_3 = Click(count=5, click_ip='132.43.23.5', link_id=link_2.id)
+click_1 = Click(click_ip='132.43.23.5', link_id=link_1.id)
+click_2 = Click(click_ip='132.43.23.5', link_id=link_2.id)
+click_3 = Click(click_ip='132.43.23.5', link_id=link_2.id)
 click_4 = Click(link_id=link_3.id)
 db.session.add(click_1)
 db.session.add(click_2)
@@ -37,8 +37,11 @@ user_1.username
 user_2.links
 link_1.short_link
 link_2.long_link
+link_1.date_created
+link_2.date_destroyed
+link_3.count
 link_3.clicks
-click_1.count
+click_1
 click_2.click_ip
 click_3.click_date
 click_4
