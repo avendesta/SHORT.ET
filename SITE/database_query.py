@@ -1,5 +1,5 @@
 from main import db
-from main import User, Link, Click
+from main.models import User, Link, Click
 
 db.create_all()
 user_1 = User(username="Rick",email="RS@gmail.com",password="AdultSwim")
