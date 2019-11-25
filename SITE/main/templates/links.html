@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+        {% block content %}
+        SHORT_LINK --> LONG_LINK <br><br><br>
+          {% for link in user.links %}<br><br>
+            {{ link.short_link }} --> {{ link.long_link }}
+            {% for click in link.clicks %}<br>
+              {{ click }}
+            {% endfor %}
+            <br>
+          {% endfor %}
+        {% endblock content %}

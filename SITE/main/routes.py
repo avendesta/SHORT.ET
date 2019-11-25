@@ -72,7 +72,7 @@ def account():
 @app.route('/links')
 @login_required
 def links():
-    return "MY LINKS GOES HERE"
+    return render_template('links.html',user=current_user)
 
 @app.errorhandler(404)
 def not_found(e):
