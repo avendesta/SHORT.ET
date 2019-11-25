@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from main import app, db, bcrypt
 from main.models import User, Link, Click
 from main.forms import ExtendForm, LoginForm, RegisterForm
+from flask_login import login_user
 
 
 
@@ -25,7 +26,12 @@ def home():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        flash(f"You have successfully logged in!! ",'success')
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for('home'))
+        else:
+            flash(f"Incorrect Email or Password!! ",'danger')
     return render_template("login.html", title="login", form=form)
 
 @app.route("/register", methods=["GET","POST"])
