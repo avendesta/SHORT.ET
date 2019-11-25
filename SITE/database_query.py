@@ -2,8 +2,10 @@ from main import db
 from main.models import User, Link, Click
 
 db.create_all()
-user_1 = User(username="Rick",email="RS@gmail.com",password="AdultSwim")
-user_2 = User(username="Homer",email="Simpson@gmail.com",password="Fox")
+
+user_1 = User(username="Rick",email="RS@gmail.com",password="$2b$12$lQbF5qi6u5gfj3stT606e.d/TgVgBajb9LX.Q5yS/RNeIqbawEn8i")
+user_2 = User(username="Homer",email="Simpson@gmail.com",password="$2b$12$lQbF5qi6u5gfj3stT606e.d/TgVgBajb9LX.Q5yS/RNeIqbawEn8i")
+print("Password is 12345678")
 
 db.session.add(user_1)
 db.session.add(user_2)
