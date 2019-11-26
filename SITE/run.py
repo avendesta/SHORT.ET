@@ -1,4 +1,4 @@
-from main import app
+from short import app
 
 
 if __name__ == "__main__":

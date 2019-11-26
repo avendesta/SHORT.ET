@@ -1,5 +1,5 @@
-from main import db
-from main.models import User, Link, Click
+from short import db
+from short.models import User, Link, Click
 
 db.create_all()
 

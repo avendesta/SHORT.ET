@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, URL, Email, EqualTo, ValidationError
-from main.models import User
-from main.password_strength import weakness
+from short.models import User
+from short.password_strength import weakness
 
 class ExtendForm(FlaskForm):
     url = StringField("URL",validators=[DataRequired(),Length(min=2,max=50), URL()])

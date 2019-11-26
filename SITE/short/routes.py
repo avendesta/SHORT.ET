@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash, request
-from main import app, db, bcrypt
-from main.models import User, Link, Click
-from main.forms import ExtendForm, LoginForm, RegisterForm
+from short import app, db, bcrypt
+from short.models import User, Link, Click
+from short.forms import ExtendForm, LoginForm, RegisterForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -33,7 +33,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(url_for('account'))
         else:
             flash(f"Incorrect Email or Password!! ",'danger')
     return render_template("login.html", title="login", form=form)
