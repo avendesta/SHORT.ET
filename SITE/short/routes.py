@@ -25,7 +25,7 @@ def home():
 @app.route("/login", methods=["GET","POST"])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('home',title='Home'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -33,7 +33,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('account'))
+            return redirect(next_page) if next_page else redirect(url_for('account',title='Account'))
         else:
             flash(f"Incorrect Email or Password!! ",'danger')
     return render_template("login.html", title="login", form=form)
@@ -41,7 +41,7 @@ def login():
 @app.route("/register", methods=["GET","POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('home',title='Home',display=True))
 
     form = RegisterForm()
     if form.validate_on_submit():
@@ -50,7 +50,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f"You account has been created successfully!! ",'success')
-        return redirect(url_for('login'))    
+        return redirect(url_for('login',title='Login'))    
     return render_template("register.html", title="register", form=form)
 
 @app.route('/about')
@@ -62,7 +62,7 @@ def about():
 def logout():
     logout_user()
     flash("You have logged out successfully",'info')
-    return redirect(url_for('home'))
+    return redirect(url_for('home',title='Home'))
 
 @app.route('/account')
 @login_required
@@ -72,7 +72,7 @@ def account():
 @app.route('/links')
 @login_required
 def links():
-    return render_template('links.html',user=current_user)
+    return render_template('links.html',user=current_user,title='Links')
 
 @app.errorhandler(404)
 def not_found(e):
