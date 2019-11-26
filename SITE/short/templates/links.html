@@ -7,7 +7,8 @@
               <th scope="col">#</th>
               <th scope="col">Short-Link</th>
               <th scope="col">Long-Link</th>
-              <th scope="col">Count</th>
+              <th scope="col">Date-Created</th>
+              <th scope="col">Click-Count</th>
             </tr>
           </thead>
           <tbody>
@@ -16,8 +17,8 @@
               <th scope="row">{{ loop.index }}</th>
               <td><a href="#">{{ link.short_link }}</a></td>
               <td>{{ link.long_link }}</td>
-
-              <td>{{ 0 }}</td>
+              <td>{{ link.date_created }}</td>
+              <td>{{ link.clicks|length }}</td>
               <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
                       <a href="#" class="btn btn-info">Stat</a>
