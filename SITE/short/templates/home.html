@@ -30,11 +30,16 @@
     </form>
 
     <br>
+    {% if url %}
 
     URL REVERSED IS : {{ url }}
 
+    {% endif %}
+
+    {% if not display %}
 <div class="btn-inline">
     <a class="btn btn-outline-success" href="/login" role="button">LOGIN</a>
     <a class="btn btn-outline-info" href="/register" role="button">REGISTER</a>
 </div>
+    {% endif %}
         {% endblock content %}

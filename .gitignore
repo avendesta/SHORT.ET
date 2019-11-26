@@ -1,3 +1,5 @@
 .vscode/
 SITE/short/__pycache__/
+SITE/**/__pycache__/
+*.pyc
 venv/
