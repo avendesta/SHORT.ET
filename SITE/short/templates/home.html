@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
         {% block content %}
+<div class="container col-3">
 
     <form action="" method="POST">
             {{ form.csrf_token }}
@@ -20,6 +21,7 @@
                 </div>
             {% else %}
                 {{ form.url(class="form-control form-control-lg") }}
+                <span> <br> </span>
             {% endif %}
 
 
@@ -34,6 +36,8 @@
 
     URL REVERSED IS : {{ url }}
 
+    {% else %}
+        <br>
     {% endif %}
 
     {% if not display %}
@@ -42,4 +46,6 @@
     <a class="btn btn-outline-info" href="/register" role="button">REGISTER</a>
 </div>
     {% endif %}
+
+</div>
         {% endblock content %}

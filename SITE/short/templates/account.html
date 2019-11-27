@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+
+    {% block content %}
+Current User <br><br>
+Name: --> {{ current_user.username }}<br>
+Email: --> {{ current_user.email }}<br>
+Picture: --> {{ current_user.image_file }}<br>
+    {% endblock content %}

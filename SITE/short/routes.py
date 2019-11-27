@@ -67,7 +67,8 @@ def logout():
 @app.route('/account')
 @login_required
 def account():
-    return f"Logged in as {current_user.username}"
+    return render_template('account.html',title='Account',current_user=current_user)
+
 
 @app.route('/links')
 @login_required
