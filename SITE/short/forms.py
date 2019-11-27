@@ -39,3 +39,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired(), Length(min=2,max=60)])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+class AddLinkForm(FlaskForm):
+    short_link = StringField("Short-URL",validators=[DataRequired(),Length(min=2,max=50)])
+    long_link = StringField("Long-URL",validators=[DataRequired(),Length(min=2,max=200), URL()])
+    submit = SubmitField('Add')

@@ -31,8 +31,48 @@
           
           </tbody>
         </table>
-        <div class="text-center">
-            <a href="#" class="btn btn-info col-2">Add</a>
+
+
+
+
+<div class="content-section col-3">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Link</legend>
+            <div class="form-group">
+                {{ form.short_link.label(class="form-control-label") }}
+                {% if form.short_link.errors %}
+                    {{ form.short_link(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.short_link.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.short_link(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.long_link.label(class="form-control-label") }}
+                {% if form.long_link.errors %}
+                    {{ form.long_link(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.long_link.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.long_link(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
         </div>
-        
-        {% endblock content %}
+
+    </form>
+</div>
+      {% endblock content %}

@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash, request
 from short import app, db, bcrypt
 from short.models import User, Link, Click
-from short.forms import ExtendForm, LoginForm, RegisterForm
+from short.forms import ExtendForm, LoginForm, RegisterForm, AddLinkForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -20,7 +20,7 @@ def home():
     if form.validate_on_submit():
         url = form.url.data[::-1]
         return render_template("home.html", url=url, title="Home", form=form, display=current_user.is_authenticated)    
-    return render_template("home.html", title="Home", form=form,display=current_user.is_authenticated)    
+    return render_template("home.html", title="Home", form=form,hide=current_user.is_authenticated)    
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -41,7 +41,7 @@ def login():
 @app.route("/register", methods=["GET","POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home',title='Home',display=True))
+        return redirect(url_for('home',title='Home',hide=True))
 
     form = RegisterForm()
     if form.validate_on_submit():
@@ -52,6 +52,19 @@ def register():
         flash(f"You account has been created successfully!! ",'success')
         return redirect(url_for('login',title='Login'))    
     return render_template("register.html", title="register", form=form)
+
+
+@app.route('/links',methods=["GET","POST"])
+@login_required
+def links():
+    form = AddLinkForm()
+    if form.validate_on_submit():
+        link = Link(short_link=form.short_link.data, long_link=form.long_link.data,user_id=current_user.id)
+        db.session.add(link)
+        db.session.commit()
+        flash("Link created successfully!",'success')
+        return redirect(url_for('links',user=current_user,title='Links',form=form))
+    return render_template('links.html',user=current_user,title='Links',form=form)
 
 @app.route('/about')
 def about():
@@ -69,11 +82,6 @@ def logout():
 def account():
     return render_template('account.html',title='Account',current_user=current_user)
 
-
-@app.route('/links')
-@login_required
-def links():
-    return render_template('links.html',user=current_user,title='Links')
 
 @app.errorhandler(404)
 def not_found(e):
