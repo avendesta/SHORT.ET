@@ -19,7 +19,7 @@ def home():
     form = ExtendForm()
     if form.validate_on_submit():
         url = form.url.data[::-1]
-        return render_template("home.html", url=url, title="Home", form=form, display=current_user.is_authenticated)    
+        return render_template("home.html", url=url, title="Home", form=form, hide=current_user.is_authenticated)    
     return render_template("home.html", title="Home", form=form,hide=current_user.is_authenticated)    
 
 @app.route("/login", methods=["GET","POST"])
