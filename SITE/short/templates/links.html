@@ -17,7 +17,7 @@
               <th scope="row">{{ loop.index }}</th>
               <td><a href="#">{{ link.short_link }}</a></td>
               <td>{{ link.long_link }}</td>
-              <td>{{ link.date_created }}</td>
+              <td>{{ link.date_created.strftime('%Y-%m-%d') }}</td>
               <td>{{ link.clicks|length }}</td>
               <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
