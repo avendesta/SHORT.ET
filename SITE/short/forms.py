@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, URL, Email, EqualTo, ValidationError
-from short.models import User
+from short.models import User, Link
 from short.password_strength import weakness
 
 class ExtendForm(FlaskForm):
@@ -44,3 +44,8 @@ class AddLinkForm(FlaskForm):
     short_link = StringField("Short-URL",validators=[DataRequired(),Length(min=2,max=50)])
     long_link = StringField("Long-URL",validators=[DataRequired(),Length(min=2,max=200), URL()])
     submit = SubmitField('Add')
+
+    def validate_short_link(self,short_link):
+        link = Link.query.filter_by(short_link=short_link.data).first()
+        if link:
+            raise ValidationError("short_link already exists!")
