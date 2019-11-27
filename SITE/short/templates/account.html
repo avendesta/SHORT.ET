@@ -1,8 +1,14 @@
 {% extends "layout.html" %}
 
     {% block content %}
-Current User <br><br>
-Name: --> {{ current_user.username }}<br>
-Email: --> {{ current_user.email }}<br>
-Picture: --> {{ current_user.image_file }}<br>
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ image_file }}">
+      <div class="media-body">
+        <h2 class="account-heading">{{ current_user.username }}</h2>
+        <p class="text-secondary">{{ current_user.email  }}</p>
+      </div>
+    </div>
+    <!-- FORM HERE -->
+  </div>
     {% endblock content %}
