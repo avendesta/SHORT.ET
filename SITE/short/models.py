@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(40), unique=True, nullable=False)
     image_file = db.Column(db.String(40), nullable=False, default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
+    premium = db.Column(db.Boolean,nullable=False, default=False)
 
     links = db.relationship('Link',backref='creator', lazy=True)
 
