@@ -1,11 +1,27 @@
 {% extends "layout.html" %}
 
 {% block content%}
-    {{ link.short_link }}<br><br>
-    {% for click in link.clicks %}
+{{ link.short_link }}
 
-        <p>{{ click.click_date.strftime('%Y-%m-%d') }}</p>
-        <p>{{ click.click_ip }}</p>
-        <br>
+<table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Click-Date</th>
+        <th scope="col">Click-IP</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for click in link.clicks %}
+    <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ click.click_date.strftime('%Y-%m-%d') }}</td>
+        <td>{{ click.click_ip }}</td>
+      </tr>
+
     {% endfor %}
+    
+    </tbody>
+  </table>
+
 {% endblock content %}

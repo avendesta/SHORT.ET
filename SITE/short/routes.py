@@ -3,7 +3,7 @@ from short import app, db, bcrypt
 from short.models import User, Link, Click
 from short.forms import ExtendForm, LoginForm, RegisterForm, AddLinkForm
 from flask_login import login_user, current_user, logout_user, login_required
-
+from short.ipstack import resolve
 
 
 
