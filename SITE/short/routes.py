@@ -84,10 +84,10 @@ def account():
     return render_template('account.html',title='Account',current_user=current_user, image_file=image_file)
 
 
-@app.route('/clicks/<int:link_id>')
+@app.route('/link/<int:link_id>')
 def stat(link_id):
     link = Link.query.get_or_404(link_id)
-    return render_template('clicks.html',title='Clicks',link=link)
+    return render_template('link.html',title='Statistics',link=link)
 
 
 

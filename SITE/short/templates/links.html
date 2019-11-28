@@ -60,13 +60,13 @@
               {% for link in user.links %}
             <tr>
               <th scope="row">{{ loop.index }}</th>
-              <td><a href="#">{{ link.short_link }}</a></td>
-              <td>{{ link.long_link }}</td>
+              <td><a href="link/{{ link.id }}">{{ link.short_link }}</a></td>
+              <td><a href="{{ link.long_link }}">{{ link.long_link }}</a></td>
               <td>{{ link.date_created.strftime('%Y-%m-%d') }}</td>
               <td>{{ link.clicks|length }}</td>
               <td>
                   <div class="btn-group" role="group" aria-label="Basic example">
-                      <a href="#" class="btn btn-info">Stat</a>
+                      <a href="link/{{ link.id }}" class="btn btn-info">Stat</a>
                       <a href="#" class="btn btn-secondary">Edit</a>
                       <a href="#" class="btn btn-danger">Delete</a>
                   </div>
@@ -76,6 +76,6 @@
           
           </tbody>
         </table>
-        
+
         
       {% endblock content %}
