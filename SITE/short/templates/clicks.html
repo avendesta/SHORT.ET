@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content%}
+    {{ link.short_link }}<br><br>
+    {% for click in link.clicks %}
+
+        <p>{{ click.click_date.strftime('%Y-%m-%d') }}</p>
+        <p>{{ click.click_ip }}</p>
+        <br>
+    {% endfor %}
+{% endblock content %}

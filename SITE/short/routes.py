@@ -33,7 +33,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('account',title='Account'))
+            return redirect(next_page) if next_page else redirect(url_for('account'))
         else:
             flash(f"Incorrect Email or Password!! ",'danger')
     return render_template("login.html", title="login", form=form)
@@ -41,7 +41,7 @@ def login():
 @app.route("/register", methods=["GET","POST"])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home',title='Home',hide=True))
+        return redirect(url_for('home'))
 
     form = RegisterForm()
     if form.validate_on_submit():
@@ -50,7 +50,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f"You account has been created successfully!! ",'success')
-        return redirect(url_for('login',title='Login'))    
+        return redirect(url_for('login'))    
     return render_template("register.html", title="register", form=form)
 
 
@@ -63,7 +63,7 @@ def links():
         db.session.add(link)
         db.session.commit()
         flash("Link created successfully!",'success')
-        return redirect(url_for('links',user=current_user,title='Links',form=form))
+        return redirect(url_for('links'))
     return render_template('links.html',user=current_user,title='Links',form=form)
 
 @app.route('/about')
@@ -75,13 +75,21 @@ def about():
 def logout():
     logout_user()
     flash("You have logged out successfully",'info')
-    return redirect(url_for('home',title='Home'))
+    return redirect(url_for('home'))
 
 @app.route('/account')
 @login_required
 def account():
     image_file = url_for('static',filename='profile_pic/'+ current_user.image_file)
     return render_template('account.html',title='Account',current_user=current_user, image_file=image_file)
+
+
+@app.route('/clicks/<int:link_id>')
+def stat(link_id):
+    link = Link.query.get_or_404(link_id)
+    return render_template('clicks.html',title='Clicks',link=link)
+
+
 
 
 @app.errorhandler(404)
