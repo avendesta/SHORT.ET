@@ -1,6 +1,51 @@
 {% extends "layout.html" %}
 
-        {% block content %}
+{% block content %}
+
+    <button class="btn btn-outline-info" data-toggle="collapse" data-target="#demo">Create</button>
+    <div id="demo" class="collapse content-section ">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+            <div class="col">
+            <div class="form-row">
+
+                <div class="form-group form-row">
+                    {{ form.short_link.label(class="form-control-label") }}
+                    {% if form.short_link.errors %}
+                        {{ form.short_link(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.short_link.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.short_link(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.long_link.label(class="form-control-label") }}
+                    {% if form.long_link.errors %}
+                        {{ form.long_link(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.long_link.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.long_link(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </div>
+        </fieldset>
+        </form>
+    </div>
         <table class="table table-hover">
           <thead>
             <tr>
@@ -31,48 +76,6 @@
           
           </tbody>
         </table>
-
-
-
-
-<div class="content-section col-3">
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Add Link</legend>
-            <div class="form-group">
-                {{ form.short_link.label(class="form-control-label") }}
-                {% if form.short_link.errors %}
-                    {{ form.short_link(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.short_link.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.short_link(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-            <div class="form-group">
-                {{ form.long_link.label(class="form-control-label") }}
-                {% if form.long_link.errors %}
-                    {{ form.long_link(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.long_link.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.long_link(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-
-        </fieldset>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
-        </div>
-
-    </form>
-</div>
+        
+        
       {% endblock content %}
